@@ -16,8 +16,12 @@ module RailsAdminGlobalizeField
       true
     end
 
+    register_instance_option :allowed_methods do
+      [method_name].compact
+    end
+
     def method_name
-      "#{super}_attributes".to_sym
+      "#{super.to_s.split('_')[0 .. -2].join('_').pluralize}_attributes".to_sym
     end
 
     def available_locales
